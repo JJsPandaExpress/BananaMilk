@@ -22,7 +22,7 @@ public class Robot extends TimedRobot {
   private final PWMSparkMax rightMotor2 = new PWMSparkMax(3);
   private final DifferentialDrive drivetrain =
       new DifferentialDrive(leftMotor1, rightMotor1);
-  private final XboxController m_driverController = new XboxController(0);
+  private final Joystick m_driverController = new Joystick(4);
 
   /** Called once at the beginning of the robot program. */
   public Robot() {
@@ -44,6 +44,6 @@ public class Robot extends TimedRobot {
     rightMotor1.set(speed);
     rightMotor2.set(speed);
 
-    drivetrain.arcadeDrive(m_driverController.getLeftY(), m_driverController.getRightX());
+    drivetrain.arcadeDrive(m_driverController.getRawAxis(1), m_driverController.getRawAxis(2));
   }
 }
