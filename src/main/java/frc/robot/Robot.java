@@ -7,20 +7,23 @@ package frc.robot;
 import edu.wpi.first.util.sendable.SendableRegistry;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.XboxController;
+//import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.SparkLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 
 /**
  * This is a demo program showing the use of the DifferentialDrive class. Runs the motors with tank
  * steering and an Xbox controller.
  */
 public class Robot extends TimedRobot {
-  private final PWMSparkMax leftMotor1 = new PWMSparkMax(0);
-  private final PWMSparkMax leftMotor2 = new PWMSparkMax(1);
-  private final PWMSparkMax rightMotor1 = new PWMSparkMax(2);
-  private final PWMSparkMax rightMotor2 = new PWMSparkMax(3);
+  private final SparkMax leftMotor1 = new SparkMax(2, MotorType.kBrushed);
+  private final SparkMax leftMotor2 = new SparkMax(3, MotorType.kBrushed);
+  private final SparkMax rightMotor1 = new SparkMax(4, MotorType.kBrushed);
+  private final SparkMax rightMotor2 = new SparkMax(5, MotorType.kBrushed);
   private final DifferentialDrive drivetrain =
       new DifferentialDrive(leftMotor1, rightMotor1);
   private final Joystick m_driverController = new Joystick(4);
@@ -39,6 +42,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
+    
     double speed=1.0;
     leftMotor1.set(speed);
     leftMotor2.set(speed);
