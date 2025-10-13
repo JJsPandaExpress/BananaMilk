@@ -56,7 +56,8 @@ dependencies {
     annotationProcessor wpi.java.deps.wpilibAnnotations()
     implementation wpi.java.deps.wpilib()
     implementation wpi.java.vendor.java()
-
+    implementation org.photonvision:photonlib-java:2024.2.1()
+    implementation 'org.photonvision:photonlib:2025.1.1' // Ensure this matches the correct version
     roborioDebug wpi.java.deps.wpilibJniDebug(wpi.platforms.roborio)
     roborioDebug wpi.java.vendor.jniDebug(wpi.platforms.roborio)
 
@@ -65,6 +66,8 @@ dependencies {
 
     nativeDebug wpi.java.deps.wpilibJniDebug(wpi.platforms.desktop)
     nativeDebug wpi.java.vendor.jniDebug(wpi.platforms.desktop)
+    implementation 'edu.wpi.first:wpilibj:2025.0.3'
+    implementation org.photonvision:photonlib:2024.2.1()
     simulationDebug wpi.sim.enableDebug()
 
     nativeRelease wpi.java.deps.wpilibJniRelease(wpi.platforms.desktop)
