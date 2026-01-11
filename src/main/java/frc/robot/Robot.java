@@ -102,7 +102,7 @@ public class Robot extends TimedRobot {
 
     // PhotonVision target processing
     PhotonPipelineResult result = camera.getLatestResult();
-    PhotonPipelineResult result = camera.getLatestResult();
+    //PhotonPipelineResult result = camera.getLatestResult();
     if (result.hasTargets()) {
       var target = result.getBestTarget();
       double yaw = target.getYaw();
@@ -146,5 +146,5 @@ class PhotonTrackedTarget {
   public double getSkew() { return 0.0; }
 }
     }
-}
+
 
