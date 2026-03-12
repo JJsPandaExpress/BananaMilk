@@ -28,6 +28,13 @@ public class Robot extends TimedRobot {
   private final SparkMax leftMotor2 = new SparkMax(3, MotorType.kBrushed);
   private final SparkMax rightMotor1 = new SparkMax(4, MotorType.kBrushed);
   private final SparkMax rightMotor2 = new SparkMax(5, MotorType.kBrushed);
+  //private final SparkMax Intake = new SparkMax(6, MotorType.kBrushed);
+  private final SparkMax intakBelt = new SparkMax(7, MotorType.kBrushed);
+  private final SparkMax Feed = new SparkMax(8, MotorType.kBrushed);
+  private final SparkMax shooterTurn = new SparkMax(9, MotorType.kBrushed);
+  private final SparkMax shooter1 = new SparkMax(10, MotorType.kBrushed);
+  private final Kraken Shooter2 = new SparkMax(12);
+
   //private final motorgro leftGroup= leftMotor2.follow(leftMotor1);
   //private final DifferentialDrive drivetrain =new DifferentialDrive(leftMotor1, rightMotor1);
   private final Joystick m_driverController = new Joystick(0);
@@ -48,6 +55,20 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
+    // PhotonVision target processing
+    PhotonPipelineResult result = camera.getLatestResult();
+    //PhotonPipelineResult result = camera.getLatestResult();
+    if (result.hasTargets()) {
+      var target = result.getBestTarget();
+      double yaw = target.getYaw();
+      double pitch = target.getPitch();
+      double area = target.getArea();
+      double skew = target.getSkew();
+
+      System.out.println("Target Info:");
+      System.out.println("Yaw: " + yaw);
+      System.out.println("Pitch: " + pitch);
+    }
     System.out.println("Speed: ");
     System.out.println("axis 0: " + m_driverController.getRawAxis(0));
     System.out.println("axis 1: " + m_driverController.getRawAxis(1));
@@ -81,6 +102,19 @@ public class Robot extends TimedRobot {
 
     double thresh = 0.1; 
 
+
+
+    if (m_driverController.get(lt)) {
+      shooter1.speed = 0.5;
+      dkafbvkahfv
+    }
+    if (m_driverController.get(rt)) {
+      result; //do some math
+
+      // tell the spark max where to put the motor
+    }
+
+    // this actually does the driving (moves motors)
     if (Math.abs(m_driverController.getRawAxis(1)) > thresh 
         || Math.abs(m_driverController.getRawAxis(5)) > thresh) {
 
@@ -100,20 +134,7 @@ public class Robot extends TimedRobot {
       rightMotor2.set(0);
     }
 
-    // PhotonVision target processing
-    PhotonPipelineResult result = camera.getLatestResult();
-    //PhotonPipelineResult result = camera.getLatestResult();
-    if (result.hasTargets()) {
-      var target = result.getBestTarget();
-      double yaw = target.getYaw();
-      double pitch = target.getPitch();
-      double area = target.getArea();
-      double skew = target.getSkew();
-
-      System.out.println("Target Info:");
-      System.out.println("Yaw: " + yaw);
-      System.out.println("Pitch: " + pitch);
-    }
+    
 }
 
 // Minimal PhotonVision stubs to allow compiling without the PhotonVision dependency.
